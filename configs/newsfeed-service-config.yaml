@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+   name: newsfeed-service-config
+data:
+   CASSANDRA_CONTACT_POINT: cassandra-service
+   CASSANDRA_KEYSPACE_NAME: instafeed
+   CASSANDRA_PORT: 9042
+   
+   

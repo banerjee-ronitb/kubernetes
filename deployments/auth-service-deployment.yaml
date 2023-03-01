@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+   name: auth-app
+spec:
+   selector:
+      matchLabels:
+         app: auth-app
+   replicas: 1
+   template:
+      metadata:
+         labels:
+            app: auth-app
+      spec:
+         containers:
+            - name: auth-app
+              image: ghcr.io/banerjee-ronitb/auth-service:latest
+              envFrom: 
+                 - configMapRef:
+                       name: kafka-service-config
+                 - configMapRef:
+                       name: okta-service-config
+              imagePullPolicy: Always
+              ports:
+                 - containerPort: 8080
+         imagePullSecrets:
+            - name: git-package-repo-secret
+ 

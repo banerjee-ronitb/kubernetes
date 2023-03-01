@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+   name: neo4j
+spec:
+   selector:
+      matchLabels:
+         app: neo4j
+   serviceName: neo4j-service
+   replicas: 1
+   updateStrategy:
+      type: RollingUpdate
+   template:
+      metadata: 
+         labels:
+            app: neo4j
+      spec:
+         containers:
+            - name: neo4j 
+              image: neo4j:latest
+              imagePullPolicy: Always
+              ports:
+                 - containerPort: 7474
+                   name: http
+                 - containerPort: 7687
+                   name: bolt
+              volumeMounts:
+                 - name: neo4j-vol
+                   mountPath: "/data"
+                   subPath: "data"
+                 - name: neo4j-vol
+                   mountPath: "/conf"
+                   subPath: "conf"
+              env:
+                 - name: NEO4J_server_config_strict__validation_enabled
+                   value: "false"
+                   
+         volumes:
+            - name: neo4j-vol
+              persistentVolumeClaim:
+                 claimName: pvc001
+                 
+                 
+              

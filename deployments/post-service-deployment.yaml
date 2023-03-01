@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+   name: post-app
+spec:
+   selector:
+      matchLabels:
+         app: post-app
+   replicas: 1
+   template:
+      metadata:
+         labels:
+            app: post-app
+      spec:
+         containers:
+            - name: post-app
+              image: ghcr.io/banerjee-ronitb/post-service:latest
+              imagePullPolicy: Always
+              ports:
+                 - containerPort: 8080
+              envFrom:
+                 - configMapRef:
+                       name: kafka-service-config
+                 - configMapRef:
+                       name: okta-service-config
+                 - configMapRef:
+                       name: mongo-service-config
+                    
+         imagePullSecrets:
+            - name: git-package-repo-secret
+            

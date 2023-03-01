@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata: 
+   name: kafka-service-config
+data: 
+   KAFKA_URL: kafka-service:9092
+   

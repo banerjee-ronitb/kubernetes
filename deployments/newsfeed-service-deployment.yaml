@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+   name: newsfeed-app
+spec:
+   selector:
+      matchLabels:
+         app: newsfeed-app
+   replicas: 1
+   template:
+      metadata:
+         labels:
+            app: newsfeed-app
+      spec:
+         containers:
+            - name: newsfeed-app
+              image: ghcr.io/banerjee-ronitb/newsfeed-service:latest
+              imagePullPolicy: Always
+              ports:
+                 - containerPort: 8080
+              envFrom: 
+                 - configMapRef:
+                       name: kafka-service-config
+                 - configMapRef:
+                       name: okta-service-config
+                 - configMapRef:
+                       name: newsfeed-service-config
+                 
+              
+         imagePullSecrets:
+            - name: git-package-repo-secret
+ 

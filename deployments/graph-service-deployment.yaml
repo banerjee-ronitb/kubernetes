@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+   name: graph-app
+spec:
+   selector:
+      matchLabels:
+         app: graph-app
+   replicas: 1
+   template:
+      metadata:
+         labels:
+            app: graph-app
+      spec:
+         containers:
+            - name: graph-app
+              image: ghcr.io/banerjee-ronitb/graph-service:latest
+              imagePullPolicy: Always
+              ports:
+                 - containerPort: 8080
+              envFrom: 
+                 - configMapRef:
+                       name: kafka-service-config
+                 - configMapRef:
+                       name: okta-service-config
+                 - configMapRef:
+                       name: graph-service-config
+         imagePullSecrets:
+            - name: git-package-repo-secret
+ 
