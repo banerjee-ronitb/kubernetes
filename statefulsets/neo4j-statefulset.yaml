@@ -27,10 +27,6 @@ spec:
               volumeMounts:
                  - name: neo4j-vol
                    mountPath: "/data"
-                   subPath: "data"
-                 - name: neo4j-vol
-                   mountPath: "/conf"
-                   subPath: "conf"
               env:
                  - name: NEO4J_server_config_strict__validation_enabled
                    value: "false"

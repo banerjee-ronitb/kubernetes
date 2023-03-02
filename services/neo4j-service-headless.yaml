@@ -13,5 +13,6 @@ spec:
       - port: 7687
         targetPort: 7687
         name: bolt
+   clusterIP: None
    selector:
       app: neo4j
