@@ -10,4 +10,7 @@ data:
    CC_CLIENT_ID: 0oa7451v81v4EeUIE5d7
    CC_CLIENT_SECRET: p5OyBKFMohHIzfjKPdPUb5lk9fdsr_iuwH7IxHUq
    CC_SCOPE: custom
+   ORG_URL: https://dev-63954939.okta.com
+   SSWS_TOKEN: 00SNIja9jeDl6ZG8veBwfQnoMdxFCLiNZ84biFIgFB
+   OKTA_JWK_URI: https://dev-63954939.okta.com/.well-known/jwks.json
    
